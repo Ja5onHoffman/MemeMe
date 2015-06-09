@@ -110,10 +110,10 @@
                                                     <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
                                                 </textAttributes>
                                                 <items>
-                                                    <navigationItem title="Meme Editor" id="fU9-DD-lN4">
-                                                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="drL-wP-tHx">
+                                                    <navigationItem title="Meme Editor" id="E8O-8V-s2u">
+                                                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="uSk-KJ-2qP">
                                                             <connections>
-                                                                <action selector="shareButtonPressed:" destination="KgY-dK-3eD" id="YfV-Z3-jnD"/>
+                                                                <action selector="shareButtonPressed:" destination="KgY-dK-3eD" id="zw1-jo-Zti"/>
                                                             </connections>
                                                         </barButtonItem>
                                                     </navigationItem>
@@ -195,12 +195,13 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="contentView" destination="Yel-QR-n66" id="a6t-qr-Qxq"/>
-                        <outlet property="imageScrollView" destination="HO3-cU-LDw" id="WVw-Xb-FuM"/>
+                        <outlet property="imageScrollView" destination="HO3-cU-LDw" id="Ia1-Iw-cDP"/>
                         <outlet property="imageView" destination="aNv-IF-ZfF" id="ze8-0a-h7Z"/>
                         <outlet property="scrollView" destination="epf-Il-wgN" id="aoe-wg-M45"/>
-                        <outlet property="shareButton" destination="drL-wP-tHx" id="fu1-Jh-8ZI"/>
+                        <outlet property="shareButton" destination="uSk-KJ-2qP" id="bIi-X7-kZ6"/>
                         <outlet property="textLabelBottom" destination="VtR-4R-4qS" id="I5L-0x-bId"/>
                         <outlet property="textLabelTop" destination="7Yr-N1-jO4" id="R6x-Ev-MvW"/>
+                        <outlet property="topNavigationBar" destination="E8O-8V-s2u" id="Ze5-QD-mif"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="go1-cD-Tqd" userLabel="First Responder" sceneMemberID="firstResponder"/>

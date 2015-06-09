@@ -39,31 +39,26 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             NSStrokeWidthAttributeName: 5.0
         ]
         
+        self.imagePicker.delegate = self
+
         self.textLabelTop.delegate = self
         self.textLabelBottom.delegate = self
-        self.imagePicker.delegate = self
-        
         self.textLabelTop.defaultTextAttributes = memeTextAttributes
         self.textLabelTop.textAlignment = .Center
         self.textLabelBottom.defaultTextAttributes = memeTextAttributes
         self.textLabelBottom.textAlignment = .Center
-        
         self.textLabelTop.text = "TOP"
         self.textLabelBottom.text = "BOTTOM"
-        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.subscribeToKeyboardNotifications()
-        
         // viewWillAppear is called when orientation changes.
         // Need to configure scrollview here to work in landscape mode.
         self.imageScrollView.minimumZoomScale = 0.5
         self.imageScrollView.maximumZoomScale = 6.0
         self.imageScrollView.contentSize = self.imageView.bounds.size
         self.imageScrollView.delegate = self
-        
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -79,7 +74,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBAction func shareButtonPressed(sender: AnyObject) {
         var memedImage: UIImage!
 
-        ////////////
         let newMeme = memeStore.createMeme(textLabelTop.text, text2: textLabelBottom.text, memeName: "meme1") { () -> UIImage in
             self.imageView.addSubview(self.textLabelTop)
             self.imageView.addSubview(self.textLabelBottom)
@@ -107,7 +101,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             return memedImage
         }
         memeStore.saveMeme(newMeme)
-        ///////////////
         
         let activities = [UIActivityTypePostToFacebook, UIActivityTypePostToTwitter, UIActivityTypePostToFlickr, UIActivityTypeSaveToCameraRoll, UIActivityTypeMail, UIActivityTypeMessage, UIActivityTypeAssignToContact, UIActivityTypeAirDrop, UIActivityTypeCopyToPasteboard]
         let activityViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
@@ -118,13 +111,25 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    func doneButtonPressed(sender: AnyObject) {
+        self.imageScrollView.scrollEnabled = false
+        self.editable = true
+        self.addCancelButton()
+    }
+    
     func addCancelButton() {
+        // Clear current UIBarButtonItem
+        self.topNavigationBar.rightBarButtonItem = nil
         self.topNavigationBar.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelButtonPressed:")
+    
     }
     
     func addDoneButton() {
-        // code
+        // Clear current UIBarButtonItem
+        self.topNavigationBar.rightBarButtonItem = nil
+        self.topNavigationBar.rightBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonPressed:")
     }
+    
     
     // MARK: UIImagePickerControllerDelegate
     
@@ -133,6 +138,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.imageView.image = image
         self.shareButton.enabled = true 
         self.dismissViewControllerAnimated(true, completion: nil)
+        self.addDoneButton()
     }
     
     @IBAction func pickImage(sender: UIBarButtonItem) {
