@@ -59,7 +59,7 @@
                     <navigationItem key="navigationItem" id="pX2-Oe-8IP">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="l4b-CA-WZo">
                             <connections>
-                                <action selector="addNewMeme:" destination="8tx-FP-JpE" id="9WK-r3-nCi"/>
+                                <action selector="addNewMeme:" destination="8tx-FP-JpE" id="kJV-Ck-kvt"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -192,6 +192,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="NL1-QU-iCd"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="contentView" destination="Yel-QR-n66" id="a6t-qr-Qxq"/>
@@ -206,7 +207,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="go1-cD-Tqd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1091" y="-288"/>
+            <point key="canvasLocation" x="1062" y="-254"/>
         </scene>
         <!--TransparentModal-->
         <scene sceneID="fp9-3M-trw">
@@ -216,7 +217,7 @@
                         <viewControllerLayoutGuide type="top" id="kne-eu-mhA"/>
                         <viewControllerLayoutGuide type="bottom" id="jGz-ch-xAI"/>
                     </layoutGuides>
-                    <view key="view" opaque="NO" contentMode="scaleToFill" id="bAX-I3-NUR">
+                    <view key="view" opaque="NO" alpha="0.69999999999999973" contentMode="scaleToFill" id="bAX-I3-NUR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -228,7 +229,7 @@
                                     <action selector="okButtonPressed:" destination="Mw0-j9-9Bc" eventType="touchUpInside" id="Jbd-1r-gbK"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Position your image using the top and bottom labels as a reference. Then press 'Done'. " lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oK0-Hd-k18">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oK0-Hd-k18">
                                 <rect key="frame" x="32" y="191" width="260" height="99"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -239,10 +240,13 @@
                         <color key="tintColor" red="0.29423290149999998" green="0.29423290149999998" blue="0.29423290149999998" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="instructionLabel" destination="oK0-Hd-k18" id="ScO-0v-p02"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XO1-d3-5Nn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1508" y="-288"/>
+            <point key="canvasLocation" x="1500" y="-254"/>
         </scene>
         <!--Item-->
         <scene sceneID="AVj-3W-xBC">
@@ -362,6 +366,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="82L-Fc-Kkk"/>
+        <segue reference="mfN-KV-LAo"/>
     </inferredMetricsTieBreakers>
 </document>

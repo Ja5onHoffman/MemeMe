@@ -27,8 +27,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.subscribeToKeyboardNotifications()
+        self.navigationController?.navigationBarHidden = true
         self.shareButton.enabled = false
         self.addCancelButton()
         
@@ -49,6 +49,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.textLabelBottom.textAlignment = .Center
         self.textLabelTop.text = "TOP"
         self.textLabelBottom.text = "BOTTOM"
+        
+        let modal = self.storyboard!.instantiateViewControllerWithIdentifier("TransparentModal") as! TransparentModalViewController
+        // iOS 8 only 
+        modal.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
+        self.presentViewController(modal, animated: true, completion: nil)
+        modal.selection = false
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -66,9 +72,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.unsubscribeFromKeyboardNotifications()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
  
     @IBAction func shareButtonPressed(sender: AnyObject) {
@@ -130,7 +135,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.topNavigationBar.rightBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonPressed:")
     }
     
-    
     // MARK: UIImagePickerControllerDelegate
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
@@ -139,6 +143,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.shareButton.enabled = true 
         self.dismissViewControllerAnimated(true, completion: nil)
         self.addDoneButton()
+        self.presentInstructions()
     }
     
     @IBAction func pickImage(sender: UIBarButtonItem) {
@@ -164,8 +169,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func presentInstructions() {
         let modal = self.storyboard!.instantiateViewControllerWithIdentifier("TransparentModal") as! TransparentModalViewController
-        modal.view.alpha = 0.7
-        self.presentViewController(modal, animated: false, completion: nil)
+        self.presentViewController(modal, animated: true, completion: nil)
     }
     
     // MARK: UITextFieldDelegate

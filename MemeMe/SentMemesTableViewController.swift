@@ -53,10 +53,9 @@ class SentMemesTableViewController: UITableViewController {
 //    }
     
     @IBAction func addNewMeme(sender: UIBarButtonItem) {
-        
-        // TODO: Move nav below status bar
         let memeEditor = self.storyboard!.instantiateViewControllerWithIdentifier("MemeEditor") as! MemeEditorViewController
-        self.navigationController?.presentViewController(memeEditor, animated: true, completion: nil)
+        let nav = UINavigationController(rootViewController: memeEditor)
+        self.navigationController?.presentViewController(nav, animated: true, completion: nil)
     }
     
     // MARK: Navigation
