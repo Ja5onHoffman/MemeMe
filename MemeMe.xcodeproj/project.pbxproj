@@ -18,7 +18,7 @@
 		31662D071B0FF54200AF1957 /* MemeEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31662D061B0FF54200AF1957 /* MemeEditorViewController.swift */; };
 		31662D091B0FF78400AF1957 /* MemeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31662D081B0FF78400AF1957 /* MemeDetailViewController.swift */; };
 		31662D0D1B13D74500AF1957 /* MemeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31662D0C1B13D74500AF1957 /* MemeStore.swift */; };
-		31D7AB8A1B26659C001A9203 /* TransparentModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D7AB891B26659C001A9203 /* TransparentModalViewController.swift */; };
+		31D7AC2C1B2DB7CA001A9203 /* TransparentModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D7AC2B1B2DB7CA001A9203 /* TransparentModal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +47,7 @@
 		31662D061B0FF54200AF1957 /* MemeEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeEditorViewController.swift; sourceTree = "<group>"; };
 		31662D081B0FF78400AF1957 /* MemeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeDetailViewController.swift; sourceTree = "<group>"; };
 		31662D0C1B13D74500AF1957 /* MemeStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeStore.swift; sourceTree = "<group>"; };
-		31D7AB891B26659C001A9203 /* TransparentModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentModalViewController.swift; sourceTree = "<group>"; };
+		31D7AC2B1B2DB7CA001A9203 /* TransparentModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +94,7 @@
 				31662CF01B0ED5CE00AF1957 /* SentMemesCollectionViewController.swift */,
 				31662D081B0FF78400AF1957 /* MemeDetailViewController.swift */,
 				31662D061B0FF54200AF1957 /* MemeEditorViewController.swift */,
-				31D7AB891B26659C001A9203 /* TransparentModalViewController.swift */,
+				31D7AC2B1B2DB7CA001A9203 /* TransparentModal.swift */,
 				31662CF21B0ED63800AF1957 /* Meme.swift */,
 				31662D0C1B13D74500AF1957 /* MemeStore.swift */,
 				31662CD21B0ED33100AF1957 /* Main.storyboard */,
@@ -235,7 +235,7 @@
 				31662D0D1B13D74500AF1957 /* MemeStore.swift in Sources */,
 				31662CEF1B0ED59F00AF1957 /* SentMemesTableViewController.swift in Sources */,
 				31662D091B0FF78400AF1957 /* MemeDetailViewController.swift in Sources */,
-				31D7AB8A1B26659C001A9203 /* TransparentModalViewController.swift in Sources */,
+				31D7AC2C1B2DB7CA001A9203 /* TransparentModal.swift in Sources */,
 				31662CF11B0ED5CE00AF1957 /* SentMemesCollectionViewController.swift in Sources */,
 				31662D071B0FF54200AF1957 /* MemeEditorViewController.swift in Sources */,
 			);

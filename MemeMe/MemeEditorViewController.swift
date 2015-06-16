@@ -13,7 +13,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     let memeStore = MemeStore.sharedStore
     let imagePicker = UIImagePickerController()
-    var imageForMeme: UIImage?
+    var imageForMeme: UIImage!
     var activeField: UITextField?
     var editable = false
     @IBOutlet weak var imageView: UIImageView!
@@ -40,7 +40,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         ]
         
         self.imagePicker.delegate = self
-
         self.textLabelTop.delegate = self
         self.textLabelBottom.delegate = self
         self.textLabelTop.defaultTextAttributes = memeTextAttributes
@@ -49,12 +48,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.textLabelBottom.textAlignment = .Center
         self.textLabelTop.text = "TOP"
         self.textLabelBottom.text = "BOTTOM"
-        
-        let modal = self.storyboard!.instantiateViewControllerWithIdentifier("TransparentModal") as! TransparentModalViewController
-        // iOS 8 only 
-        modal.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
-        self.presentViewController(modal, animated: true, completion: nil)
-        modal.selection = false
+        TransparentModal.modalInView(self.view, forSelectionOrPlacement: "selection")
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -63,7 +57,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         // Need to configure scrollview here to work in landscape mode.
         self.imageScrollView.minimumZoomScale = 0.5
         self.imageScrollView.maximumZoomScale = 6.0
-        self.imageScrollView.contentSize = self.imageView.bounds.size
+        self.imageScrollView.contentSize = self.imageView.frame.size
         self.imageScrollView.delegate = self
     }
     
@@ -77,11 +71,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
  
     @IBAction func shareButtonPressed(sender: AnyObject) {
-        var memedImage: UIImage!
-
         let newMeme = memeStore.createMeme(textLabelTop.text, text2: textLabelBottom.text, memeName: "meme1") { () -> UIImage in
             self.imageView.addSubview(self.textLabelTop)
             self.imageView.addSubview(self.textLabelBottom)
+            let scale: CGRect = self.scrollView.convertRect(self.scrollView.bounds, toView: self.imageView)
             UIGraphicsBeginImageContextWithOptions(self.imageView.frame.size, false, 0.0)
             let ctx = UIGraphicsGetCurrentContext()
             self.imageView.layer.renderInContext(ctx)
@@ -101,15 +94,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             println("point1: \(point1)\npoint2: \(point2)\ntop superview: \(self.textLabelTop.superview!)\nbottom superview \(self.textLabelBottom.superview!)")
             */
             
-            memedImage = UIGraphicsGetImageFromCurrentImageContext()
+            self.imageForMeme = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
-            return memedImage
+            return self.imageForMeme
         }
         memeStore.saveMeme(newMeme)
-        
-        let activities = [UIActivityTypePostToFacebook, UIActivityTypePostToTwitter, UIActivityTypePostToFlickr, UIActivityTypeSaveToCameraRoll, UIActivityTypeMail, UIActivityTypeMessage, UIActivityTypeAssignToContact, UIActivityTypeAirDrop, UIActivityTypeCopyToPasteboard]
-        let activityViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-        self.presentViewController(activityViewController, animated: true, completion: nil)
+//        self.showActivityViewController()
     }
   
     func cancelButtonPressed(sender: AnyObject) {
@@ -117,8 +107,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func doneButtonPressed(sender: AnyObject) {
+        println("donebuttonpressed:")
         self.imageScrollView.scrollEnabled = false
+        self.imageScrollView.userInteractionEnabled = false
         self.editable = true
+        self.shareButton.enabled = true
         self.addCancelButton()
     }
     
@@ -126,7 +119,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         // Clear current UIBarButtonItem
         self.topNavigationBar.rightBarButtonItem = nil
         self.topNavigationBar.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelButtonPressed:")
-    
     }
     
     func addDoneButton() {
@@ -135,15 +127,21 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.topNavigationBar.rightBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonPressed:")
     }
     
+    func showActivityViewController() {
+        let activityViewController = UIActivityViewController(activityItems:[self.imageForMeme], applicationActivities: nil)
+        activityViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
+        self.presentViewController(activityViewController, animated: true, completion: nil)
+    }
+    
     // MARK: UIImagePickerControllerDelegate
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         self.imageView.image = image
-        self.shareButton.enabled = true 
+        self.imageScrollView.scrollEnabled = true
         self.dismissViewControllerAnimated(true, completion: nil)
         self.addDoneButton()
-        self.presentInstructions()
+        TransparentModal.modalInView(self.view, forSelectionOrPlacement: "placement")
     }
     
     @IBAction func pickImage(sender: UIBarButtonItem) {
@@ -165,11 +163,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             imagePicker.sourceType = .PhotoLibrary
             self.presentViewController(imagePicker, animated: true, completion: nil)
         }
-    }
-    
-    func presentInstructions() {
-        let modal = self.storyboard!.instantiateViewControllerWithIdentifier("TransparentModal") as! TransparentModalViewController
-        self.presentViewController(modal, animated: true, completion: nil)
     }
     
     // MARK: UITextFieldDelegate
@@ -231,6 +224,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // MARK: UIScrollViewDelegate
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        self.imageView.center = scrollView.center
         return self.imageView
     }
 }
