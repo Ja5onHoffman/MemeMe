@@ -98,6 +98,7 @@
                                                 <constraints>
                                                     <constraint firstItem="aNv-IF-ZfF" firstAttribute="leading" secondItem="HO3-cU-LDw" secondAttribute="leading" id="0q3-vK-bSE"/>
                                                     <constraint firstAttribute="trailing" secondItem="aNv-IF-ZfF" secondAttribute="trailing" id="31X-YS-gMQ"/>
+                                                    <constraint firstAttribute="height" secondItem="aNv-IF-ZfF" secondAttribute="height" id="4Di-hI-3Lt"/>
                                                     <constraint firstItem="aNv-IF-ZfF" firstAttribute="top" secondItem="HO3-cU-LDw" secondAttribute="top" id="BCv-PP-0g6"/>
                                                     <constraint firstItem="aNv-IF-ZfF" firstAttribute="width" secondItem="HO3-cU-LDw" secondAttribute="width" id="Xd5-Fx-GVt"/>
                                                     <constraint firstAttribute="bottom" secondItem="aNv-IF-ZfF" secondAttribute="bottom" id="yhp-zu-JzA"/>

@@ -16,6 +16,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     var imageForMeme: UIImage!
     var activeField: UITextField?
     var editable = false
+//    var imageView: UIImageView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textLabelTop: UITextField!
     @IBOutlet weak var textLabelBottom: UITextField!
@@ -57,7 +58,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         // Need to configure scrollview here to work in landscape mode.
         self.imageScrollView.minimumZoomScale = 0.5
         self.imageScrollView.maximumZoomScale = 6.0
-        self.imageScrollView.contentSize = self.imageView.frame.size
         self.imageScrollView.delegate = self
     }
     
@@ -69,31 +69,28 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
+    
+//    func setUpScrollView() {
+//        self.imageScrollView.frame.size = UIScreen.mainScreen().bounds.size
+//        self.imageScrollView.addSubview(self.imageView)
+//        let scrollViewFrame = self.imageScrollView.frame
+//        let scaleWidth = scrollViewFrame.size.width / self.imageScrollView.contentSize.width
+//        let scaleHeight = scrollViewFrame.size.height / self.imageScrollView.contentSize.height
+//        let minScale = min(scaleWidth, scaleHeight)
+//        self.imageScrollView.minimumZoomScale = minScale
+//        self.imageScrollView.maximumZoomScale = 1.0
+//        self.imageScrollView.zoomScale = minScale
+//    }
  
     @IBAction func shareButtonPressed(sender: AnyObject) {
         let newMeme = memeStore.createMeme(textLabelTop.text, text2: textLabelBottom.text, memeName: "meme1") { () -> UIImage in
             self.imageView.addSubview(self.textLabelTop)
             self.imageView.addSubview(self.textLabelBottom)
-            let scale: CGRect = self.scrollView.convertRect(self.scrollView.bounds, toView: self.imageView)
-            UIGraphicsBeginImageContextWithOptions(self.imageView.frame.size, false, 0.0)
+            UIGraphicsBeginImageContextWithOptions(self.imageScrollView.bounds.size, false, UIScreen.mainScreen().scale)
             let ctx = UIGraphicsGetCurrentContext()
-            self.imageView.layer.renderInContext(ctx)
-            
-            /*
-            /  My original attempt to add the text fields to the image view
-            /  had to do with translating the points from the view to the
-            /  context. I was getting close, but discovered that adding the
-            /  text fields to imageView as subviews also works. Is this a hack?
-            /
-            let point1 = self.textLabelTop.superview!.convertPoint(self.textLabelTop.frame.origin, toView: self.imageView)
-            CGContextTranslateCTM(ctx, point1.x, point1.y)
-            self.textLabelTop.layer.renderInContext(ctx)
-            let point2 = self.textLabelBottom.superview!.convertPoint(self.textLabelBottom.frame.origin, toView: self.imageView)
-            CGContextTranslateCTM(ctx, point2.x, point2.y)
-            self.textLabelBottom.layer.renderInContext(ctx)
-            println("point1: \(point1)\npoint2: \(point2)\ntop superview: \(self.textLabelTop.superview!)\nbottom superview \(self.textLabelBottom.superview!)")
-            */
-            
+            let offset: CGPoint = self.imageScrollView.contentOffset
+            CGContextTranslateCTM(UIGraphicsGetCurrentContext(), -offset.x, -offset.y)
+            self.imageScrollView.layer.renderInContext(ctx)
             self.imageForMeme = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             return self.imageForMeme
@@ -224,7 +221,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // MARK: UIScrollViewDelegate
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
-        self.imageView.center = scrollView.center
+        println("\(scrollView)")
         return self.imageView
     }
 }
