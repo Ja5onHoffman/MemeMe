@@ -16,7 +16,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     var imageForMeme: UIImage!
     var activeField: UITextField?
     var editable = false
-//    var imageView: UIImageView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textLabelTop: UITextField!
     @IBOutlet weak var textLabelBottom: UITextField!
@@ -34,10 +33,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.addCancelButton()
         
         let memeTextAttributes: Dictionary = [
-            NSForegroundColorAttributeName: UIColor.redColor(),
-            NSStrokeColorAttributeName: UIColor.redColor(),
+            NSStrokeColorAttributeName: UIColor.blackColor(),
             NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSStrokeWidthAttributeName: 5.0
+            NSStrokeWidthAttributeName: 1.0,
+            NSForegroundColorAttributeName: UIColor.whiteColor()
         ]
         
         self.imagePicker.delegate = self
@@ -69,34 +68,26 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
-    
-//    func setUpScrollView() {
-//        self.imageScrollView.frame.size = UIScreen.mainScreen().bounds.size
-//        self.imageScrollView.addSubview(self.imageView)
-//        let scrollViewFrame = self.imageScrollView.frame
-//        let scaleWidth = scrollViewFrame.size.width / self.imageScrollView.contentSize.width
-//        let scaleHeight = scrollViewFrame.size.height / self.imageScrollView.contentSize.height
-//        let minScale = min(scaleWidth, scaleHeight)
-//        self.imageScrollView.minimumZoomScale = minScale
-//        self.imageScrollView.maximumZoomScale = 1.0
-//        self.imageScrollView.zoomScale = minScale
-//    }
  
     @IBAction func shareButtonPressed(sender: AnyObject) {
         let newMeme = memeStore.createMeme(textLabelTop.text, text2: textLabelBottom.text, memeName: "meme1") { () -> UIImage in
-            self.imageView.addSubview(self.textLabelTop)
-            self.imageView.addSubview(self.textLabelBottom)
             UIGraphicsBeginImageContextWithOptions(self.imageScrollView.bounds.size, false, UIScreen.mainScreen().scale)
             let ctx = UIGraphicsGetCurrentContext()
             let offset: CGPoint = self.imageScrollView.contentOffset
-            CGContextTranslateCTM(UIGraphicsGetCurrentContext(), -offset.x, -offset.y)
+            CGContextTranslateCTM(ctx, -offset.x, -offset.y)
+            self.textLabelTop.layer.renderInContext(ctx)
             self.imageScrollView.layer.renderInContext(ctx)
+            CGContextConcatCTM(ctx, self.imageScrollView.transform)
+            self.textLabelTop.layer.renderInContext(ctx)
+
             self.imageForMeme = UIGraphicsGetImageFromCurrentImageContext()
+
             UIGraphicsEndImageContext()
+            
             return self.imageForMeme
         }
         memeStore.saveMeme(newMeme)
-//        self.showActivityViewController()
+        self.showActivityViewController()
     }
   
     func cancelButtonPressed(sender: AnyObject) {
