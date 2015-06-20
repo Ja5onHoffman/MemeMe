@@ -100,11 +100,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MemeMe/TransparentModal.swift"
-            timestampString = "456458488.636197"
+            timestampString = "456503362.534189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "dismiss(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -116,13 +116,29 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MemeMe/TransparentModal.swift"
-            timestampString = "456458488.636197"
+            timestampString = "456503362.534189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
             landmarkName = "TransparentModal"
             landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MemeMe/MemeEditorViewController.swift"
+            timestampString = "456518336.514859"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "shareButtonPressed(_:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

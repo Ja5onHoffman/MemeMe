@@ -119,12 +119,13 @@
                                                     </navigationItem>
                                                 </items>
                                             </navigationBar>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Yr-N1-jO4">
-                                                <rect key="frame" x="20" y="81" width="280" height="48"/>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Yr-N1-jO4">
+                                                <rect key="frame" x="20" y="80" width="280" height="47"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="280" id="zT2-0i-Qoo"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                             </textField>
                                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" tag="200" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bFa-YT-38y">
@@ -145,33 +146,56 @@
                                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="g0U-TV-Kyw"/>
                                                 </items>
                                             </toolbar>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" allowsEditingTextAttributes="YES" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VtR-4R-4qS">
-                                                <rect key="frame" x="20" y="440" width="280" height="48"/>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VtR-4R-4qS">
+                                                <rect key="frame" x="20" y="441" width="280" height="47"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="280" id="yqD-nX-TMx"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="VtR-4R-4qS" secondAttribute="bottom" constant="80" id="44G-di-t3a"/>
                                             <constraint firstItem="HO3-cU-LDw" firstAttribute="leading" secondItem="Yel-QR-n66" secondAttribute="leading" id="6wD-sB-dvt"/>
                                             <constraint firstAttribute="centerX" secondItem="7Yr-N1-jO4" secondAttribute="centerX" id="79o-AF-tPt"/>
                                             <constraint firstItem="pCg-dc-21N" firstAttribute="leading" secondItem="Yel-QR-n66" secondAttribute="leading" id="9ix-A2-lWV"/>
+                                            <constraint firstAttribute="bottom" secondItem="VtR-4R-4qS" secondAttribute="bottom" constant="55" id="F3O-MM-1lJ"/>
                                             <constraint firstItem="bFa-YT-38y" firstAttribute="top" secondItem="HO3-cU-LDw" secondAttribute="bottom" id="J41-0K-Dc7"/>
                                             <constraint firstItem="HO3-cU-LDw" firstAttribute="top" secondItem="pCg-dc-21N" secondAttribute="bottom" id="Jo4-fV-gvH"/>
                                             <constraint firstAttribute="bottom" secondItem="bFa-YT-38y" secondAttribute="bottom" id="Ldg-Ge-rLd"/>
                                             <constraint firstAttribute="trailing" secondItem="pCg-dc-21N" secondAttribute="trailing" id="NuZ-Po-WPT"/>
+                                            <constraint firstItem="7Yr-N1-jO4" firstAttribute="top" secondItem="Yel-QR-n66" secondAttribute="top" constant="80" id="d97-UE-12z"/>
                                             <constraint firstAttribute="centerX" secondItem="VtR-4R-4qS" secondAttribute="centerX" id="g8I-7f-NrI"/>
+                                            <constraint firstAttribute="bottom" secondItem="VtR-4R-4qS" secondAttribute="bottom" constant="80" id="jyW-Tf-HAH"/>
+                                            <constraint firstItem="7Yr-N1-jO4" firstAttribute="top" secondItem="Yel-QR-n66" secondAttribute="top" constant="55" id="nQR-Pl-l8b"/>
                                             <constraint firstItem="pCg-dc-21N" firstAttribute="top" secondItem="Yel-QR-n66" secondAttribute="top" id="nyg-iB-03X"/>
                                             <constraint firstAttribute="trailing" secondItem="bFa-YT-38y" secondAttribute="trailing" id="p8x-ii-dGJ"/>
                                             <constraint firstItem="bFa-YT-38y" firstAttribute="leading" secondItem="Yel-QR-n66" secondAttribute="leading" id="pP4-9B-8h0"/>
                                             <constraint firstItem="HO3-cU-LDw" firstAttribute="width" secondItem="Yel-QR-n66" secondAttribute="width" id="qTs-hz-fre"/>
                                             <constraint firstAttribute="trailing" secondItem="HO3-cU-LDw" secondAttribute="trailing" id="wF8-gm-3H1"/>
-                                            <constraint firstItem="7Yr-N1-jO4" firstAttribute="top" secondItem="Yel-QR-n66" secondAttribute="top" constant="81" id="yvB-TU-MvG"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="d97-UE-12z"/>
+                                                <exclude reference="nQR-Pl-l8b"/>
+                                                <exclude reference="F3O-MM-1lJ"/>
+                                                <exclude reference="jyW-Tf-HAH"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="nQR-Pl-l8b"/>
+                                                <include reference="F3O-MM-1lJ"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="d97-UE-12z"/>
+                                                <include reference="jyW-Tf-HAH"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.1058823529" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -209,7 +233,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="go1-cD-Tqd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1062" y="-254"/>
+            <point key="canvasLocation" x="1176" y="-254.25"/>
         </scene>
         <!--Item-->
         <scene sceneID="AVj-3W-xBC">
@@ -228,7 +252,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q6M-8l-VFA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="126" y="-254"/>
+            <point key="canvasLocation" x="134" y="-543"/>
         </scene>
         <!--Sent Memes Collection View Controller-->
         <scene sceneID="yHb-dS-xV2">
@@ -273,7 +297,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xFB-Xk-Qa3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="630" y="453"/>
+            <point key="canvasLocation" x="630" y="753"/>
         </scene>
         <!--Meme Detail View Controller-->
         <scene sceneID="1aA-8o-OSf">
@@ -306,7 +330,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yGO-hY-vI9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1091" y="453"/>
+            <point key="canvasLocation" x="1062" y="594"/>
         </scene>
         <!--Item-->
         <scene sceneID="5ks-2W-GvR">
@@ -325,10 +349,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kQg-6k-81F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="126" y="396"/>
+            <point key="canvasLocation" x="124" y="573"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="mfN-KV-LAo"/>
+        <segue reference="82L-Fc-Kkk"/>
     </inferredMetricsTieBreakers>
 </document>

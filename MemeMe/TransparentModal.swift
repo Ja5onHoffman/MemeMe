@@ -23,15 +23,6 @@ class TransparentModal: UIView {
         modal.backgroundColor = UIColor.darkGrayColor()
         modal.setTranslatesAutoresizingMaskIntoConstraints(false)
         
-//        button = UIButton(frame: CGRectMake(0, 0, 116, 50))
-//        button.center = CGPointMake(view.bounds.size.width / 2, view.bounds.size.height / 1.6)
-//        button.backgroundColor = UIColor.lightGrayColor()
-//        button.layer.cornerRadius = 4
-//        button.setTitle("Ok", forState: UIControlState.Normal)
-//        button.addTarget(self, action:"dismiss:", forControlEvents: UIControlEvents.TouchUpInside)
-//        modal.addSubview(button)
-        
-        
         self.label = UILabel(frame: CGRectMake(0, 0, 260, 100))
         label.setTranslatesAutoresizingMaskIntoConstraints(false)
         label.preferredMaxLayoutWidth = 260
@@ -61,11 +52,9 @@ class TransparentModal: UIView {
         view.addConstraint(NSLayoutConstraint(item: modal, attribute: NSLayoutAttribute.Leading, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Leading, multiplier: 1.0, constant: 0.0))
         view.addConstraint(NSLayoutConstraint(item: modal, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Trailing, multiplier: 1.0, constant: 0.0))
         
-        
         self.animateWithDuration(0.5, animations: { () -> Void in
             self.modal.alpha = 0.7
         })
-        
         
         return modal
     }

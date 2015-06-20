@@ -35,10 +35,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let memeTextAttributes: Dictionary = [
             NSStrokeColorAttributeName: UIColor.blackColor(),
             NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSStrokeWidthAttributeName: 1.0,
+            NSStrokeWidthAttributeName: -1.0,
             NSForegroundColorAttributeName: UIColor.whiteColor()
         ]
-        
+  
         self.imagePicker.delegate = self
         self.textLabelTop.delegate = self
         self.textLabelBottom.delegate = self
@@ -75,15 +75,14 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             let ctx = UIGraphicsGetCurrentContext()
             let offset: CGPoint = self.imageScrollView.contentOffset
             CGContextTranslateCTM(ctx, -offset.x, -offset.y)
-            self.textLabelTop.layer.renderInContext(ctx)
             self.imageScrollView.layer.renderInContext(ctx)
-            CGContextConcatCTM(ctx, self.imageScrollView.transform)
-            self.textLabelTop.layer.renderInContext(ctx)
 
+            CGContextMoveToPoint(ctx, offset.x, offset.y)
+            CGContextSetStrokeColorWithColor(ctx, UIColor.redColor().CGColor)
+            CGContextAddLineToPoint(ctx, 100.0, 100.0)
+            CGContextStrokePath(ctx)
             self.imageForMeme = UIGraphicsGetImageFromCurrentImageContext()
-
             UIGraphicsEndImageContext()
-            
             return self.imageForMeme
         }
         memeStore.saveMeme(newMeme)
