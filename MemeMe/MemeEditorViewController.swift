@@ -16,6 +16,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     var imageForMeme: UIImage!
     var activeField: UITextField?
     var editable = false
+    var memeName: String?
+    var alertField = UITextField()
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textLabelTop: UITextField!
     @IBOutlet weak var textLabelBottom: UITextField!
@@ -71,7 +73,31 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
  
     @IBAction func shareButtonPressed(sender: AnyObject) {
-        let newMeme = memeStore.createMeme(textLabelTop.text, text2: textLabelBottom.text, memeName: "meme1") { () -> UIImage in
+        var alertController:UIAlertController?
+        
+        alertController = UIAlertController(title: "Name your Meme.", message: "What do you want to name your meme?", preferredStyle: .Alert)
+        
+        alertController!.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+                self.alertField.placeholder = "Meme name"
+        })
+        
+        let action = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: {[weak self]
+                (paramAction:UIAlertAction!) in
+                if let textFields = alertController?.textFields{
+                    let theTextFields = textFields as! [UITextField]
+                    self!.memeName = theTextFields[0].text
+                    self!.createMeme()
+                }
+            })
+        
+        alertController?.addAction(action)
+        
+        self.presentViewController(alertController!,
+            animated: true, completion:nil)
+    }
+    
+    func createMeme() {
+        let newMeme = memeStore.createMeme(textLabelTop.text, text2: textLabelBottom.text, memeName: self.memeName!) { () -> UIImage in
             UIGraphicsBeginImageContextWithOptions(self.imageScrollView.bounds.size, false, 0)
             let ctx = UIGraphicsGetCurrentContext()
             let offset: CGPoint = self.imageScrollView.contentOffset
@@ -191,9 +217,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         var aRect = view.frame
         aRect.size.height -= kbSize!.height
         
-        if (!CGRectContainsPoint(aRect, self.activeField!.frame.origin) ) {
-            let scrollPoint:CGPoint = CGPointMake(0.0, activeField!.frame.origin.y - kbSize!.height)
-            scrollView.setContentOffset(scrollPoint, animated: true)
+        if let active = self.activeField {
+            if (!CGRectContainsPoint(aRect, active.frame.origin) ) {
+                let scrollPoint:CGPoint = CGPointMake(0.0, activeField!.frame.origin.y - kbSize!.height)
+                scrollView.setContentOffset(scrollPoint, animated: true)
+            }
         }
     }
     

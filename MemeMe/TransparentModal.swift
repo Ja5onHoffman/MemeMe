@@ -40,10 +40,8 @@ class TransparentModal: UIView {
         self.modal.addGestureRecognizer(tapGesture)
         // Change label text based on situation
         if forSelectionOrPlacement == "selection" {
-            println("selection")
             label.text = "Select an image using your camera or photo library with the buttons below."
         } else if forSelectionOrPlacement == "placement" {
-            println("placement")
             label.text = "Pinch and drag to place your photo, then press done to edit the meme text."
         }
         
