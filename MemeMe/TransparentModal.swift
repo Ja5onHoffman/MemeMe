@@ -9,6 +9,10 @@
 import UIKit
 import Foundation
 
+// This is an inefficient way to create a modal. It was more an exercise
+// creating a resuable object. This is a shadow of something I found on 
+// GitHub called Hudview that displays a 'loading' spinner. I couldn't
+// find the original repo, but had something similar in an old project.
 class TransparentModal: UIView {
     
     static var button: UIButton!

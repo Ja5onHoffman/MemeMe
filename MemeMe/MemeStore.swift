@@ -8,7 +8,8 @@
 
 import UIKit
 
-// MemeStore is responsible for creating, deleting and saving memes
+// MemeStore is responsible for creating, deleting and saving memes.
+// It's based on a Big Nerd Ranch tutorial I completed about a year ago.
 class MemeStore: NSObject {
     
     var memeArray = [Meme]()
