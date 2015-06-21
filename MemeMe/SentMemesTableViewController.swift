@@ -21,6 +21,7 @@ class SentMemesTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        // Caution message but doesn't work otherwise
         if let ar = store.allMemes() as? [Meme] {
             self.memeArray = ar
         }
@@ -34,7 +35,6 @@ class SentMemesTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
         return self.memeArray.count
     }
 
@@ -42,16 +42,11 @@ class SentMemesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier, forIndexPath: indexPath) as! UITableViewCell
         cell.imageView?.image = self.memeArray[indexPath.row].memeImage
         cell.textLabel!.text = self.memeArray[indexPath.row].memeName
-        
         return cell
     }
     
-//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        let memeDetailView = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetail") as! MemeDetailViewController
-//        
-//        self.presentViewController(memeDetailView, animated: true, completion: nil)
-//    }
-    
+    // Editor is instatiated from storyboard instead of using
+    // built in transition.
     @IBAction func addNewMeme(sender: UIBarButtonItem) {
         let memeEditor = self.storyboard!.instantiateViewControllerWithIdentifier("MemeEditor") as! MemeEditorViewController
         let nav = UINavigationController(rootViewController: memeEditor)

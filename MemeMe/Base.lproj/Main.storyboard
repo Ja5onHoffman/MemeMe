@@ -119,7 +119,7 @@
                                                     </navigationItem>
                                                 </items>
                                             </navigationBar>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Yr-N1-jO4">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Yr-N1-jO4">
                                                 <rect key="frame" x="20" y="80" width="280" height="47"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="280" id="zT2-0i-Qoo"/>
@@ -158,6 +158,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="VtR-4R-4qS" secondAttribute="bottom" constant="80" placeholder="YES" id="32q-bZ-CMi"/>
                                             <constraint firstItem="HO3-cU-LDw" firstAttribute="leading" secondItem="Yel-QR-n66" secondAttribute="leading" id="6wD-sB-dvt"/>
                                             <constraint firstAttribute="centerX" secondItem="7Yr-N1-jO4" secondAttribute="centerX" id="79o-AF-tPt"/>
                                             <constraint firstItem="pCg-dc-21N" firstAttribute="leading" secondItem="Yel-QR-n66" secondAttribute="leading" id="9ix-A2-lWV"/>
@@ -174,6 +175,7 @@
                                             <constraint firstAttribute="trailing" secondItem="bFa-YT-38y" secondAttribute="trailing" id="p8x-ii-dGJ"/>
                                             <constraint firstItem="bFa-YT-38y" firstAttribute="leading" secondItem="Yel-QR-n66" secondAttribute="leading" id="pP4-9B-8h0"/>
                                             <constraint firstItem="HO3-cU-LDw" firstAttribute="width" secondItem="Yel-QR-n66" secondAttribute="width" id="qTs-hz-fre"/>
+                                            <constraint firstItem="7Yr-N1-jO4" firstAttribute="top" secondItem="Yel-QR-n66" secondAttribute="top" constant="80" placeholder="YES" id="veO-VE-fri"/>
                                             <constraint firstAttribute="trailing" secondItem="HO3-cU-LDw" secondAttribute="trailing" id="wF8-gm-3H1"/>
                                         </constraints>
                                         <variation key="default">
@@ -239,7 +241,7 @@
         <scene sceneID="AVj-3W-xBC">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aW0-Vh-xLb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="yRs-Pe-ONI"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="table_30x30" id="yRs-Pe-ONI"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Kz-QZ-d9P">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -297,7 +299,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xFB-Xk-Qa3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="630" y="753"/>
+            <point key="canvasLocation" x="604" y="624"/>
         </scene>
         <!--Meme Detail View Controller-->
         <scene sceneID="1aA-8o-OSf">
@@ -336,7 +338,7 @@
         <scene sceneID="5ks-2W-GvR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2Mz-Z2-vYo" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="y0V-Rw-HF0"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="collection_30x30" id="y0V-Rw-HF0"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="sBN-Tk-KK1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -352,6 +354,10 @@
             <point key="canvasLocation" x="124" y="573"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="collection_30x30" width="30" height="30"/>
+        <image name="table_30x30" width="30" height="30"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="82L-Fc-Kkk"/>
     </inferredMetricsTieBreakers>

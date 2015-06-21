@@ -65,22 +65,22 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.unsubscribeFromKeyboardNotifications()
     }
     
+    // Hide status bar since editor is a modal
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
  
     @IBAction func shareButtonPressed(sender: AnyObject) {
         let newMeme = memeStore.createMeme(textLabelTop.text, text2: textLabelBottom.text, memeName: "meme1") { () -> UIImage in
-            UIGraphicsBeginImageContextWithOptions(self.imageScrollView.bounds.size, false, UIScreen.mainScreen().scale)
+            UIGraphicsBeginImageContextWithOptions(self.imageScrollView.bounds.size, false, 0)
             let ctx = UIGraphicsGetCurrentContext()
             let offset: CGPoint = self.imageScrollView.contentOffset
             CGContextTranslateCTM(ctx, -offset.x, -offset.y)
             self.imageScrollView.layer.renderInContext(ctx)
-
-            CGContextMoveToPoint(ctx, offset.x, offset.y)
-            CGContextSetStrokeColorWithColor(ctx, UIColor.redColor().CGColor)
-            CGContextAddLineToPoint(ctx, 100.0, 100.0)
-            CGContextStrokePath(ctx)
+            CGContextSaveGState(ctx)
+            CGContextTranslateCTM(ctx, offset.x + self.textLabelTop.frame.origin.x, offset.y + self.textLabelTop.frame.origin.y)
+            self.textLabelTop.layer.renderInContext(ctx)
+            CGContextRestoreGState(ctx)
             self.imageForMeme = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             return self.imageForMeme
@@ -94,7 +94,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func doneButtonPressed(sender: AnyObject) {
-        println("donebuttonpressed:")
         self.imageScrollView.scrollEnabled = false
         self.imageScrollView.userInteractionEnabled = false
         self.editable = true
@@ -121,7 +120,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     // MARK: UIImagePickerControllerDelegate
-    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         self.imageView.image = image
@@ -142,9 +140,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 alertController.addAction(alertAction)
                 self.presentViewController(alertController, animated: true, completion:nil)
-                
-                // TODO: Get rid of alert before presenting imagePicker
-                
             }
         } else if sender.tag == 201 {
             imagePicker.sourceType = .PhotoLibrary
@@ -159,7 +154,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        self.activeField = textField 
+        self.activeField = textField
+        // Erase placeholder text when editing begins
         textField.text = ""
     }
     
@@ -176,7 +172,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func subscribeToKeyboardNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWasShown:", name: UIKeyboardDidShowNotification, object: nil)
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillBeHidden:", name: UIKeyboardWillHideNotification, object: nil)
     }
     
@@ -211,7 +206,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // MARK: UIScrollViewDelegate
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
-        println("\(scrollView)")
         return self.imageView
     }
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MemeStore is responsible for creating, deleting and saving memes
 class MemeStore: NSObject {
     
     var memeArray = [Meme]()
@@ -20,15 +21,6 @@ class MemeStore: NSObject {
             self.memeArray = ar
         }
     }
-    
-//    func generateMemeImage() -> UIImage {
-//        UIGraphicsBeginImageContext(self.view.frame.size)
-//        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
-//        let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-//        
-//        return memedImage
-//    }
     
     func createMeme(text1: String, text2: String, memeName: String, memeImage: () -> UIImage) -> Meme {
         let meme = Meme(text1: text1, text2: text2, memeName: memeName, memeImage: memeImage())

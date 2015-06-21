@@ -9,7 +9,7 @@
 import UIKit
 
 class Meme: NSObject, NSCoding {
-    
+    // Meme array persists
     static var ar = [Dictionary<String, String>]()
     
     var t1: String?
@@ -28,6 +28,7 @@ class Meme: NSObject, NSCoding {
         self.memeImage = memeImage 
     }
     
+    // Core Data to save memes 
     required convenience init(coder decoder: NSCoder) {
         self.init()
         let imageData = decoder.decodeObjectForKey("memeImage") as! NSData

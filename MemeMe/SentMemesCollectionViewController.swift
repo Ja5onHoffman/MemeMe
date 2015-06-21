@@ -17,7 +17,9 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let width = 103
+        // Set up collection view. Width set for three wide
+        // in portrait mode.
+        let width = (self.view.bounds.size.width / 3) - 3
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: width, height: width)
         layout.minimumInteritemSpacing = 2.0
@@ -27,12 +29,8 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
     
     override func viewWillAppear(animated: Bool) {
         self.memeArray = store.allMemes()
+        // reload to include new images
         self.collectionView?.reloadData()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: UICollectionViewDataSource
@@ -46,10 +44,8 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
         let cellRect = CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)
         let imageView = UIImageView(frame: cellRect)
         cell.addSubview(imageView)
-        println("width: \(cell.frame.size.width), height: \(cell.frame.size.height)")
         imageView.image = self.memeArray[indexPath.row].memeImage
         imageView.contentMode = UIViewContentMode.ScaleAspectFill
-
         return cell
     }
 
@@ -64,6 +60,7 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowDetail" {
             let mdv = segue.destinationViewController as! MemeDetailViewController
+            // Get rid of tab bar in detail view
             mdv.hidesBottomBarWhenPushed = true
             let cell = sender as! UICollectionViewCell
             if let index = self.collectionView!.indexPathsForSelectedItems().first as? NSIndexPath {
@@ -72,25 +69,4 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
         }
     }
 }
-
-
-extension SentMemesCollectionViewController: UICollectionViewDelegateFlowLayout {
-    
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
