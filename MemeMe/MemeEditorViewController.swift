@@ -85,18 +85,18 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 (paramAction:UIAlertAction!) in
                 if let textFields = alertController?.textFields{
                     let theTextFields = textFields as! [UITextField]
+                    theTextFields[0].resignFirstResponder()
                     self!.memeName = theTextFields[0].text
-                    self!.createMeme()
                 }
+                self!.createMeme()
             })
         
         alertController?.addAction(action)
-        
         self.presentViewController(alertController!,
             animated: true, completion:nil)
     }
     
-    func createMeme() {
+    func createMeme() -> Meme {
         let newMeme = memeStore.createMeme(textLabelTop.text, text2: textLabelBottom.text, memeName: self.memeName!) { () -> UIImage in
             UIGraphicsBeginImageContextWithOptions(self.imageScrollView.bounds.size, false, 0)
             let ctx = UIGraphicsGetCurrentContext()
@@ -111,8 +111,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             UIGraphicsEndImageContext()
             return self.imageForMeme
         }
-        memeStore.saveMeme(newMeme)
+        
+        // Shows again when activityviewcontroller finishes
         self.showActivityViewController()
+        return newMeme
     }
   
     func cancelButtonPressed(sender: AnyObject) {
@@ -141,6 +143,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func showActivityViewController() {
         let activityViewController = UIActivityViewController(activityItems:[self.imageForMeme], applicationActivities: nil)
+        let completionItems: UIActivityViewControllerCompletionWithItemsHandler = { (activityType: String!, completed: Bool, returnedItems: [AnyObject]!, activityError: NSError!) -> Void in
+            println("\(completed)")
+            if completed == true {
+                let meme = self.createMeme()
+                self.memeStore.saveMeme(meme)
+                
+            }
+        }
+        activityViewController.completionWithItemsHandler = completionItems
         activityViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
         self.presentViewController(activityViewController, animated: true, completion: nil)
     }
