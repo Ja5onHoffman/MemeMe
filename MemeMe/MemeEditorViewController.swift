@@ -95,7 +95,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.presentViewController(alertController!,
             animated: true, completion:nil)
     }
-    
+
     func createMeme() -> Meme {
         let newMeme = memeStore.createMeme(textLabelTop.text, text2: textLabelBottom.text, memeName: self.memeName!) { () -> UIImage in
             UIGraphicsBeginImageContextWithOptions(self.imageScrollView.bounds.size, false, 0)
