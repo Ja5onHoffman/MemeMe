@@ -26,14 +26,16 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var imageScrollView: UIScrollView!
     @IBOutlet weak var topNavigationBar: UINavigationItem!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.subscribeToKeyboardNotifications()
         self.navigationController?.navigationBarHidden = true
-        self.shareButton.enabled = false
-        self.addCancelButton()
-        
+        UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
+        shareButton.enabled = false
+        addCancelButton()
+        navBar.autoresizingMask = UIViewAutoresizing.FlexibleHeight
         let memeTextAttributes: Dictionary = [
             NSStrokeColorAttributeName: UIColor.blackColor(),
             NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
@@ -73,6 +75,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
  
     @IBAction func shareButtonPressed(sender: AnyObject) {
+        activeField?.resignFirstResponder()
         var alertController:UIAlertController?
         
         alertController = UIAlertController(title: "Name your Meme.", message: "What do you want to name your meme?", preferredStyle: .Alert)
@@ -88,32 +91,43 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                     theTextFields[0].resignFirstResponder()
                     self!.memeName = theTextFields[0].text
                 }
-                self!.createMeme()
+                self?.createMeme()
+                self?.showActivityViewController()
             })
         
         alertController?.addAction(action)
-        self.presentViewController(alertController!,
-            animated: true, completion:nil)
+        self.presentViewController(alertController!, animated: true, completion:nil)
     }
 
     func createMeme() -> Meme {
         let newMeme = memeStore.createMeme(textLabelTop.text, text2: textLabelBottom.text, memeName: self.memeName!) { () -> UIImage in
+            var space: CGFloat!
+            
+            space = 44 // Default
+            // Place text correctly if device orientation changes
+            if UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) {
+                space = 44
+            } else if UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation) {
+                space = 32
+            }
+            
             UIGraphicsBeginImageContextWithOptions(self.imageScrollView.bounds.size, false, 0)
             let ctx = UIGraphicsGetCurrentContext()
             let offset: CGPoint = self.imageScrollView.contentOffset
             CGContextTranslateCTM(ctx, -offset.x, -offset.y)
             self.imageScrollView.layer.renderInContext(ctx)
             CGContextSaveGState(ctx)
-            CGContextTranslateCTM(ctx, offset.x + self.textLabelTop.frame.origin.x, offset.y + self.textLabelTop.frame.origin.y)
+            CGContextTranslateCTM(ctx, offset.x + self.textLabelTop.frame.origin.x, offset.y + self.textLabelTop.frame.origin.y - space)
             self.textLabelTop.layer.renderInContext(ctx)
+            CGContextRestoreGState(ctx)
+            CGContextSaveGState(ctx)
+            CGContextTranslateCTM(ctx, offset.x + self.textLabelBottom.frame.origin.x, offset.y + self.textLabelBottom.frame.origin.y - space)
+            self.textLabelBottom.layer.renderInContext(ctx)
             CGContextRestoreGState(ctx)
             self.imageForMeme = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             return self.imageForMeme
         }
-        
-        // Shows again when activityviewcontroller finishes
-        self.showActivityViewController()
         return newMeme
     }
   
@@ -142,15 +156,17 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func showActivityViewController() {
-        let activityViewController = UIActivityViewController(activityItems:[self.imageForMeme], applicationActivities: nil)
         let completionItems: UIActivityViewControllerCompletionWithItemsHandler = { (activityType: String!, completed: Bool, returnedItems: [AnyObject]!, activityError: NSError!) -> Void in
             println("\(completed)")
             if completed == true {
                 let meme = self.createMeme()
                 self.memeStore.saveMeme(meme)
                 
+                // Dismiss editor if meme is shared
+                self.dismissViewControllerAnimated(true, completion: nil)
             }
         }
+        let activityViewController = UIActivityViewController(activityItems:[self.imageForMeme], applicationActivities: nil)
         activityViewController.completionWithItemsHandler = completionItems
         activityViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
         self.presentViewController(activityViewController, animated: true, completion: nil)
@@ -167,6 +183,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     @IBAction func pickImage(sender: UIBarButtonItem) {
+        println("\(self.navBar.frame.size.height)")
         if sender.tag == 200 {
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
                 imagePicker.sourceType = .Camera

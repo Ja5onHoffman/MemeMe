@@ -93,6 +93,9 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                        <variation key="heightClass=compact-widthClass=regular" ambiguous="YES" misplaced="YES">
+                                                            <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                                        </variation>
                                                     </imageView>
                                                 </subviews>
                                                 <constraints>
@@ -103,9 +106,16 @@
                                                     <constraint firstItem="aNv-IF-ZfF" firstAttribute="width" secondItem="HO3-cU-LDw" secondAttribute="width" id="Xd5-Fx-GVt"/>
                                                     <constraint firstAttribute="bottom" secondItem="aNv-IF-ZfF" secondAttribute="bottom" id="yhp-zu-JzA"/>
                                                 </constraints>
+                                                <variation key="heightClass=compact-widthClass=regular" ambiguous="YES" misplaced="YES">
+                                                    <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                                </variation>
                                             </scrollView>
                                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pCg-dc-21N">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="8pV-6v-D0e"/>
+                                                    <constraint firstAttribute="height" constant="44" id="hA9-aS-Tvx"/>
+                                                </constraints>
                                                 <textAttributes key="titleTextAttributes">
                                                     <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
                                                 </textAttributes>
@@ -118,6 +128,25 @@
                                                         </barButtonItem>
                                                     </navigationItem>
                                                 </items>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="8pV-6v-D0e"/>
+                                                        <exclude reference="hA9-aS-Tvx"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="heightClass=compact">
+                                                    <mask key="constraints">
+                                                        <include reference="8pV-6v-D0e"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="widthClass=compact">
+                                                    <mask key="constraints">
+                                                        <include reference="hA9-aS-Tvx"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="heightClass=compact-widthClass=regular" ambiguous="YES" misplaced="YES">
+                                                    <rect key="frame" x="0.0" y="0.0" width="568" height="0.0"/>
+                                                </variation>
                                             </navigationBar>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Yr-N1-jO4">
                                                 <rect key="frame" x="20" y="80" width="280" height="47"/>
@@ -130,6 +159,10 @@
                                             </textField>
                                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" tag="200" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bFa-YT-38y">
                                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="RK0-Zp-BXl"/>
+                                                    <constraint firstAttribute="height" constant="44" id="v6C-pc-DFQ"/>
+                                                </constraints>
                                                 <items>
                                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="VkA-wy-KgU"/>
                                                     <barButtonItem tag="200" systemItem="camera" id="8NL-Be-su0">
@@ -145,6 +178,25 @@
                                                     </barButtonItem>
                                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="g0U-TV-Kyw"/>
                                                 </items>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="RK0-Zp-BXl"/>
+                                                        <exclude reference="v6C-pc-DFQ"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="heightClass=compact">
+                                                    <mask key="constraints">
+                                                        <include reference="RK0-Zp-BXl"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="widthClass=compact">
+                                                    <mask key="constraints">
+                                                        <include reference="v6C-pc-DFQ"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="heightClass=compact-widthClass=regular" ambiguous="YES" misplaced="YES">
+                                                    <rect key="frame" x="0.0" y="320" width="568" height="0.0"/>
+                                                </variation>
                                             </toolbar>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VtR-4R-4qS">
                                                 <rect key="frame" x="20" y="441" width="280" height="47"/>
@@ -226,6 +278,7 @@
                         <outlet property="contentView" destination="Yel-QR-n66" id="a6t-qr-Qxq"/>
                         <outlet property="imageScrollView" destination="HO3-cU-LDw" id="Ia1-Iw-cDP"/>
                         <outlet property="imageView" destination="aNv-IF-ZfF" id="ze8-0a-h7Z"/>
+                        <outlet property="navBar" destination="pCg-dc-21N" id="THJ-ss-lia"/>
                         <outlet property="scrollView" destination="epf-Il-wgN" id="aoe-wg-M45"/>
                         <outlet property="shareButton" destination="uSk-KJ-2qP" id="bIi-X7-kZ6"/>
                         <outlet property="textLabelBottom" destination="VtR-4R-4qS" id="I5L-0x-bId"/>
@@ -235,7 +288,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="go1-cD-Tqd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1053" y="-254"/>
+            <point key="canvasLocation" x="1254" y="-260"/>
         </scene>
         <!--Item-->
         <scene sceneID="AVj-3W-xBC">
