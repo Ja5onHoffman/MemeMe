@@ -22,8 +22,8 @@ class Meme: NSObject, NSCoding {
     }
     
     init(text1: String, text2: String, memeName: String, memeImage: UIImage) {
-        self.t1 = text1
-        self.t2 = text2
+        t1 = text1
+        t2 = text2
         self.memeName = memeName
         self.memeImage = memeImage 
     }
@@ -32,10 +32,10 @@ class Meme: NSObject, NSCoding {
     required convenience init(coder decoder: NSCoder) {
         self.init()
         let imageData = decoder.decodeObjectForKey("memeImage") as! NSData
-        self.t1 = decoder.decodeObjectForKey("t1") as? String
-        self.t2 = decoder.decodeObjectForKey("t2")as? String
-        self.memeName = decoder.decodeObjectForKey("memeName") as? String
-        self.memeImage = UIImage(data:imageData)
+        t1 = decoder.decodeObjectForKey("t1") as? String
+        t2 = decoder.decodeObjectForKey("t2")as? String
+        memeName = decoder.decodeObjectForKey("memeName") as? String
+        memeImage = UIImage(data:imageData)
     }
     
     func encodeWithCoder(coder: NSCoder) {

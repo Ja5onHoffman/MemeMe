@@ -23,7 +23,7 @@ class SentMemesTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         // Caution message but doesn't work otherwise
         if let ar = store.allMemes() as? [Meme] {
-            self.memeArray = ar
+            memeArray = ar
         }
         self.tableView.reloadData()
     }

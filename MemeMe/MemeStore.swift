@@ -30,7 +30,7 @@ class MemeStore: NSObject {
     }
     
     func allMemes() -> [Meme] {
-        return self.memeArray
+        return memeArray
     }
     
     func documentsDirectory() -> String {
@@ -46,6 +46,6 @@ class MemeStore: NSObject {
     }
     
     func deleteMeme(atIndex index: Int) {
-        self.memeArray.removeAtIndex(index)
+        memeArray.removeAtIndex(index)
     }
 }

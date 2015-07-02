@@ -43,15 +43,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             NSForegroundColorAttributeName: UIColor.whiteColor()
         ]
   
-        self.imagePicker.delegate = self
-        self.textLabelTop.delegate = self
-        self.textLabelBottom.delegate = self
-        self.textLabelTop.defaultTextAttributes = memeTextAttributes
-        self.textLabelTop.textAlignment = .Center
-        self.textLabelBottom.defaultTextAttributes = memeTextAttributes
-        self.textLabelBottom.textAlignment = .Center
-        self.textLabelTop.text = "TOP"
-        self.textLabelBottom.text = "BOTTOM"
+        imagePicker.delegate = self
+        textLabelTop.delegate = self
+        textLabelBottom.delegate = self
+        textLabelTop.defaultTextAttributes = memeTextAttributes
+        textLabelTop.textAlignment = .Center
+        textLabelBottom.defaultTextAttributes = memeTextAttributes
+        textLabelBottom.textAlignment = .Center
+        textLabelTop.text = "TOP"
+        textLabelBottom.text = "BOTTOM"
         TransparentModal.modalInView(self.view, forSelectionOrPlacement: "selection")
     }
     
@@ -59,9 +59,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         super.viewWillAppear(animated)
         // viewWillAppear is called when orientation changes.
         // Need to configure scrollview here to work in landscape mode.
-        self.imageScrollView.minimumZoomScale = 0.5
-        self.imageScrollView.maximumZoomScale = 6.0
-        self.imageScrollView.delegate = self
+        imageScrollView.minimumZoomScale = 0.5
+        imageScrollView.maximumZoomScale = 6.0
+        imageScrollView.delegate = self
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -100,7 +100,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
 
     func createMeme() -> Meme {
-        let newMeme = memeStore.createMeme(textLabelTop.text, text2: textLabelBottom.text, memeName: self.memeName!) { () -> UIImage in
+        let newMeme = memeStore.createMeme(textLabelTop.text, text2: textLabelBottom.text, memeName: memeName!) { () -> UIImage in
             var space: CGFloat!
             
             space = 44 // Default
@@ -136,11 +136,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func doneButtonPressed(sender: AnyObject) {
-        self.imageScrollView.scrollEnabled = false
-        self.imageScrollView.userInteractionEnabled = false
-        self.editable = true
-        self.shareButton.enabled = true
-        self.addCancelButton()
+        imageScrollView.scrollEnabled = false
+        imageScrollView.userInteractionEnabled = false
+        editable = true
+        shareButton.enabled = true
+        addCancelButton()
     }
     
     func addCancelButton() {
@@ -175,8 +175,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // MARK: UIImagePickerControllerDelegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        self.imageView.image = image
-        self.imageScrollView.scrollEnabled = true
+        imageView.image = image
+        imageScrollView.scrollEnabled = true
         self.dismissViewControllerAnimated(true, completion: nil)
         self.addDoneButton()
         TransparentModal.modalInView(self.view, forSelectionOrPlacement: "placement")
@@ -208,13 +208,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        self.activeField = textField
+        activeField = textField
         // Erase placeholder text when editing begins
         textField.text = ""
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        self.activeField = nil
+        activeField = nil
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -262,7 +262,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // MARK: UIScrollViewDelegate
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
-        return self.imageView
+        return imageView
     }
 }
 

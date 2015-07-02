@@ -28,7 +28,7 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.memeArray = store.allMemes()
+        memeArray = store.allMemes()
         // reload to include new images
         self.collectionView?.reloadData()
     }
@@ -36,7 +36,7 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
     // MARK: UICollectionViewDataSource
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.memeArray.count
+        return memeArray.count
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
